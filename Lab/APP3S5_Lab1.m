@@ -68,6 +68,49 @@ hold off
 grid on
 
 %% Probleme 3
+t3 = [0:0.01:25]';
+u3 = zeros(size(t3));
+u3((t3 >= 0) &(t3 < 2)) = 2;
+u3((t3 >= 2)) = 0.5;
 
+num6 = [1 2];
+den6 = [1 1 0.25];
+tf6 = tf(num6,den6);
 
+[A,B,C,D] = tf2ss(num6,den6);
+Ymat2 = lsim(tf6,u3,t3);
 
+figure('Name','Probleme 3')
+plot(t3,Ymat2)
+grid on;
+
+%% Probleme 5
+A5 = [-2 -2.5 -0.5;
+    1 0 0;
+    0 1 0];
+B5 = [1; 0; 0];
+C5 = [0 1.5 1];
+D5 = [0];
+
+SYS7 = ss(A5,B5,C5,D5);
+
+x07 = [1 0 2]';
+t7 = [0:0.01:25]';
+u7((t7 >= 0) &(t7 < 2)) = 2;
+u7((t7 >= 2)) = 0.5;
+
+[Y7,T7,X7] = lsim(SYS7,u7,t7,x07);
+
+figure('Name','Probleme 5')
+plot(T7,X7)
+legend('x1(t)','x2(t)','x3(t)')
+grid on
+
+SYS2 = ss(A5,B5,C5,D5);
+X08 = [0 0 0];
+[Y8,T8,X8] = lsim(SYS2,u7,t7,X08);
+
+figure('Name','Probleme 5 CI = 0')
+plot(T8,X8)
+legend('x1(t)','x2(t)','x3(t)')
+grid on
