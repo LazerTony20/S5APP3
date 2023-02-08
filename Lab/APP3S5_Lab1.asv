@@ -49,25 +49,12 @@ pzmap(tf123)
 
 %(B) Réduire le modèle
 [numtot, dentot] = tfdata(tf123, 'v');
-[Residues1, Poles, K2] = residue(numtot,dentot);  
-poids = abs(Residues1)./real(Poles);
-%selon le output de mon poids, je prends les 5e et 6e
-%on recrée la fonction mais en gardant juste le plus important
-[num4,den4] = residue(Residues1(5:6),Poles(5:6),K2);
-tf4 = tf(num4,den4);
+[R, P, K2] = residue(numtot,dentot); %residue fait : 
 
-Ktf123 = dcgain(tf123);
-Ktf4 = dcgain(tf4);
-Kn = Ktf123/Ktf4;
 
-figure('Name','Lab1 Prob 2')
-hold on
+figure()
 stepplot(tf123)
-stepplot(Kn*tf4)
-hold off
 grid on
-
-%% Probleme 3
 
 
 
