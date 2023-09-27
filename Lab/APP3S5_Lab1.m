@@ -11,7 +11,7 @@ load DonneesIdentifSyst1erOrdre_1.mat
 % Pour mon denumerateur, je garde ordre 1 car je prends l'ordre de mon
 % denominateur comme niveau de conservation
 Xentree1 = u;
-Xsortie1 = diff(y)./diff(t);
+Xsortie1 = -diff(y)./diff(t);
 Ymat = y(1:end-1);
 
 Xmat = [Xentree1(1:end-1) Xsortie1];
